@@ -42,28 +42,44 @@ export default class MMScrollView extends Component {
       )
     })
   }
+  _updateSelectedPage (page) {
+    this.setState({
+      currentPage: page
+    })
+  }
   _onMomentumScrollBeginAndEnd (e) {
     const offsetX = e.nativeEvent.contentOffset.x
+    const page = Math.round(offsetX / this.state.containerWidth);
+    if (this.state.currentPage !== page) {
+      this._updateSelectedPage(page);
+    }
   }
   renderScrollableContent () {
     const rn = this
     const scenes = rn._composeScenes();
     return (
       <ScrollView
-        horizontal = {true}
+        horizontal
+        pagingEnabled
         ref={(scrollView) => { this.scrollView = scrollView; }}
         contentOffset={{ x: rn.props.initialPage * rn.state.containerWidth}}
         showsHorizontalScrollIndicator={false}
         onScroll={(e) => {
           const offsetX = e.nativeEvent.contentOffset.x
         }}
-        onMomentumScrollBegin={this._onMomentumScrollBeginAndEnd}
-        onMomentumScrollEnd={this._onMomentumScrollBeginAndEnd}>
+        scrollEventThrottle={16}
+        onMomentumScrollBegin={(e) => this._onMomentumScrollBeginAndEnd(e)}
+        onMomentumScrollEnd={(e) => this._onMomentumScrollBeginAndEnd(e)}>
         {scenes}
       </ScrollView>
     )
   }
   goToPage (page) {
+    const rn = this
+    const offset = page * rn.state.containerWidth;
+    if (rn.scrollView) {
+      rn.scrollView.scrollTo({x: offset, y: 0});
+    }
     this.setState({
       currentPage: page
     })

@@ -21,7 +21,9 @@ export default class ReactNativeMM extends Component {
     return (
       <View style={styles.container} onLayout = {this._handleLayout}>
         <MMScrollView tabBarActiveTextColor='green'>
-          <View label="home" style={styles.home}></View>
+          <View label="home" style={styles.home}>
+            <Text>sdfdsf</Text>
+          </View>
           <View label="accout" style={styles.accout}></View>
           <View label="game" style={styles.game}></View>
           <View label="soft" style={styles.soft}></View>
@@ -37,19 +39,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   home: {
-    height: 300,
+    height: 800,
     backgroundColor: 'ivory'
   },
   soft: {
-    height: 300,
+    height: 800,
     backgroundColor: 'antiquewhite'
   },
   game: {
-    height: 300,
+    height: 800,
     backgroundColor: 'beige'
   },
   accout: {
-    height: 300,
+    height: 800,
     backgroundColor: 'cornsilk'
   }
 });
