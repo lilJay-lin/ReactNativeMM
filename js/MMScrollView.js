@@ -110,6 +110,9 @@ export default class MMScrollView extends Component {
       currentPage: page
     })
   }
+  renderTabBar (props) {
+    return <TabBar {...props}></TabBar>
+  }
   render () {
     const rn = this
     const tabBarProps = {
@@ -134,7 +137,7 @@ export default class MMScrollView extends Component {
     return (
       <View style={styles.scrollView}>
         {this.renderScrollableContent()}
-        <TabBar {...tabBarProps}></TabBar>
+        {rn.renderTabBar(tabBarProps)}
       </View>
     )
   }

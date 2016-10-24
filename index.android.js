@@ -29,13 +29,13 @@ export default class ReactNativeMM extends Component {
           </ScrollView>
           <View label="accout"  style={{flex: 1, backgroundColor: 'antiquewhite'}}>
             <MMScrollView >
-              <View style={{height: 100}} label="1">
+              <View style={{height: 100, paddingTop: 50}} label="1">
                 <Text>1234</Text>
               </View>
-              <View style={{height: 100}} label="2">
+              <View style={{height: 100, paddingTop: 50}} label="2">
                 <Text>1234</Text>
               </View>
-              <View style={{height: 100}} label="3">
+              <View style={{height: 100, paddingTop: 50}} label="3">
                 <Text>1234</Text>
               </View>
             </MMScrollView>
