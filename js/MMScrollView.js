@@ -7,23 +7,32 @@ import {
   StyleSheet,
   ScrollView,
   Text,
+  Animated,
   Dimensions
 } from 'react-native'
 import TabBar from './TabBar'
+import SceneComponent from './SceneComponent'
 
 export default class MMScrollView extends Component {
   constructor (props) {
     super(props)
     this.state = {
       currentPage: this.props.initialPage,
-      containerWidth: Dimensions.get('window').width
+      containerWidth: Dimensions.get('window').width,
+      scrollValue: new Animated.Value(this.props.initialPage)
     }
   }
   static propTypes = {
-    initialPage: PropTypes.number
+    tabBarPosition: PropTypes.oneOf(['top', 'bottom', 'overlayTop', 'overlayBottom']),
+    initialPage: PropTypes.number,
+    onScroll: PropTypes.func,
+    locked: PropTypes.bool
   }
   static defaultProps = {
-    initialPage: 0
+    tabBarPosition: 'top',
+    initialPage: 0,
+    locked: false,
+    onScroll () {}
   }
   _children (children = this.props.children) {
     return React.Children.map(children, (child) => child)
@@ -31,14 +40,22 @@ export default class MMScrollView extends Component {
   _makeSceneKey(child, idx) {
     return child.props.label + '_' + idx;
   }
+  _shouldRenderSceneKey () {
+
+  }
   _composeScenes () {
     const rn = this
     return rn._children().map((child, idx) => {
       let key = rn._makeSceneKey(child, idx)
       return (
-        <View key={key} style={{width: this.state.containerWidth}}>
+        <SceneComponent
+          key={key}
+          shouldUpdated={this._shouldRenderSceneKey(idx, this.state.currentPage)}
+          style={{width: this.state.containerWidth }}
+        >
           {child}
-        </View>
+        </SceneComponent>
+
       )
     })
   }
@@ -54,6 +71,10 @@ export default class MMScrollView extends Component {
       this._updateSelectedPage(page);
     }
   }
+  _updateScrollValue (value) {
+    this.state.scrollValue.setValue(value);
+    this.props.onScroll(value);
+  }
   renderScrollableContent () {
     const rn = this
     const scenes = rn._composeScenes();
@@ -61,15 +82,20 @@ export default class MMScrollView extends Component {
       <ScrollView
         horizontal
         pagingEnabled
+        automaticallyAdjustContentInsets={false}
         ref={(scrollView) => { this.scrollView = scrollView; }}
         contentOffset={{ x: rn.props.initialPage * rn.state.containerWidth}}
         showsHorizontalScrollIndicator={false}
         onScroll={(e) => {
           const offsetX = e.nativeEvent.contentOffset.x
+          this._updateScrollValue(offsetX / this.state.containerWidth)
         }}
+        directionalLockEnabled
         scrollEventThrottle={16}
+        scrollEnabled={!rn.props.locked}
         onMomentumScrollBegin={(e) => this._onMomentumScrollBeginAndEnd(e)}
-        onMomentumScrollEnd={(e) => this._onMomentumScrollBeginAndEnd(e)}>
+        onMomentumScrollEnd={(e) => this._onMomentumScrollBeginAndEnd(e)}
+        keyboardDismissMode="on-drag">
         {scenes}
       </ScrollView>
     )
@@ -89,13 +115,21 @@ export default class MMScrollView extends Component {
     const tabBarProps = {
       goToPage: (page) => rn.goToPage(page),
       activeTab: rn.state.currentPage,
-      tabs: rn._children().map((child) => child.props.label)
+      tabs: rn._children().map((child) => child.props.label),
+      scrollValue: rn.state.scrollValue,
+      containerWidth: rn.state.containerWidth
     }
     if (this.props.tabBarActiveTextColor) {
-      tabBarProps.activeTextColor = this.props.tabBarActiveTextColor;
+      tabBarProps.activeTextColor = rn.props.tabBarActiveTextColor;
     }
     if (this.props.tabBarInactiveTextColor) {
-      tabBarProps.inactiveTextColor = this.props.tabBarInactiveTextColor;
+      tabBarProps.inactiveTextColor = rn.props.tabBarInactiveTextColor;
+    }
+    tabBarProps.style = {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      [rn.props.tabBarPosition]: 0,
     }
     return (
       <View style={styles.scrollView}>

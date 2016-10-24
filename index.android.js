@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native'
 import MMScrollView from './js/MMScrollView'
 export default class ReactNativeMM extends Component {
@@ -20,13 +21,31 @@ export default class ReactNativeMM extends Component {
   render() {
     return (
       <View style={styles.container} onLayout = {this._handleLayout}>
-        <MMScrollView tabBarActiveTextColor='green'>
-          <View label="home" style={styles.home}>
+        <MMScrollView locked={true} tabBarPosition='bottom'>
+          <ScrollView label="home">
             <Text>sdfdsf</Text>
+            <View style={{height: 500, backgroundColor: '#000'}}></View>
+            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+          </ScrollView>
+          <View label="accout"  style={{flex: 1, backgroundColor: 'antiquewhite'}}>
+            <MMScrollView >
+              <View style={{height: 100}} label="1">
+                <Text>1234</Text>
+              </View>
+              <View style={{height: 100}} label="2">
+                <Text>1234</Text>
+              </View>
+              <View style={{height: 100}} label="3">
+                <Text>1234</Text>
+              </View>
+            </MMScrollView>
           </View>
-          <View label="accout" style={styles.accout}></View>
-          <View label="game" style={styles.game}></View>
-          <View label="soft" style={styles.soft}></View>
+          <ScrollView label="game">
+            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+          </ScrollView>
+          <ScrollView label="soft">
+            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+          </ScrollView>
         </MMScrollView>
       </View>
     );

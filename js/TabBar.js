@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from 'react-native'
 import Button from './Button'
 export default class TabBar extends Component {
@@ -19,17 +20,26 @@ export default class TabBar extends Component {
     activeTab: PropTypes.number,
     activeTextColor: PropTypes.string,
     inactiveTextColor: PropTypes.string,
-    goToPage: PropTypes.func
+    backgroundColor: PropTypes.string,
+    goToPage: PropTypes.func,
+    tabStyle: View.propTypes.style,
+    renderTab: React.PropTypes.func,
+    underlineStyle: View.propTypes.style
+  }
+  static defaultProps  = {
+    activeTextColor: 'navy',
+    inactiveTextColor: 'black',
+    backgroundColor: null
   }
   _renderTab (name, page, active, onPressHandle) {
     const {activeTextColor, inactiveTextColor} = this.props
-    const textColor = active ? this.props.activeTextColor : this.props.inactiveTextColor
+    const textColor = active ? activeTextColor : inactiveTextColor
     return (
       <Button
         key={name}
         onPress={() => onPressHandle(page)}
         style={{flex: 1}}>
-        <View style={styles.tab}>
+        <View style={[styles.tab, this.props.tabStyle]}>
           <Text style={[styles.text, {color: textColor}]}>
             {name}
           </Text>
@@ -38,14 +48,28 @@ export default class TabBar extends Component {
     )
   }
   render() {
+    const rn = this
+    const containerWidth = rn.props.containerWidth;
+    const numberOfTabs = rn.props.tabs.length;
+    const tabUnderlineStyle = {
+      position: 'absolute',
+      width: containerWidth / numberOfTabs,
+      height: 4,
+      backgroundColor: 'navy',
+      bottom: 0
+    }
+    const left = this.props.scrollValue.interpolate({
+      inputRange: [0, 1], outputRange: [0,  containerWidth / numberOfTabs]
+    })
     return (
-      <View style={styles.tabs}>
+      <View style={[styles.tabs, this.props.style]}>
         {
-          this.props.tabs.map((name, page) => {
-            const active = page === this.props.activeTab
-            return this._renderTab(name, page, active, this.props.goToPage)
+          rn.props.tabs.map((name, page) => {
+            const active = page === rn.props.activeTab
+            return rn._renderTab(name, page, active, rn.props.goToPage)
           })
         }
+        <Animated.View style={[tabUnderlineStyle, { left}, this.props.underlineStyle ]} />
       </View>
     );
   }
@@ -73,7 +97,6 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     position: 'absolute',
     left: 0,
-    right: 0,
-    bottom: 0
+    right: 0
   }
 });
