@@ -49,6 +49,7 @@ export default class TabBar extends Component {
   }
   render() {
     const rn = this
+    const props = rn.props
     const containerWidth = rn.props.containerWidth;
     const numberOfTabs = rn.props.tabs.length;
     const tabUnderlineStyle = {
@@ -58,18 +59,18 @@ export default class TabBar extends Component {
       backgroundColor: 'navy',
       bottom: 0
     }
-    const left = this.props.scrollValue.interpolate({
+    const left = props.scrollValue.interpolate({
       inputRange: [0, 1], outputRange: [0,  containerWidth / numberOfTabs]
     })
     return (
-      <View style={[styles.tabs, this.props.style]}>
+      <View style={[styles.tabs, props.style]}>
         {
-          rn.props.tabs.map((name, page) => {
-            const active = page === rn.props.activeTab
-            return rn._renderTab(name, page, active, rn.props.goToPage)
+          props.tabs.map((name, page) => {
+            const active = page === props.activeTab
+            return rn._renderTab(name, page, active, props.goToPage)
           })
         }
-        <Animated.View style={[tabUnderlineStyle, { left}, this.props.underlineStyle ]} />
+        <Animated.View style={[tabUnderlineStyle, { left}, props.underlineStyle ]} />
       </View>
     );
   }
