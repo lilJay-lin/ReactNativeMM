@@ -24,7 +24,8 @@ export default class TabBar extends Component {
     goToPage: PropTypes.func,
     tabStyle: View.propTypes.style,
     renderTab: React.PropTypes.func,
-    underlineStyle: View.propTypes.style
+    underlineStyle: View.propTypes.style,
+    textStyle: View.propTypes.style
   }
   static defaultProps  = {
     activeTextColor: 'navy',
@@ -32,7 +33,7 @@ export default class TabBar extends Component {
     backgroundColor: null
   }
   _renderTab (name, page, active, onPressHandle) {
-    const {activeTextColor, inactiveTextColor} = this.props
+    const {activeTextColor, inactiveTextColor, textStyle} = this.props
     const textColor = active ? activeTextColor : inactiveTextColor
     return (
       <Button
@@ -40,7 +41,7 @@ export default class TabBar extends Component {
         onPress={() => onPressHandle(page)}
         style={{flex: 1}}>
         <View style={[styles.tab, this.props.tabStyle]}>
-          <Text style={[styles.text, {color: textColor}]}>
+          <Text style={[styles.text, textStyle, {color: textColor}]}>
             {name}
           </Text>
         </View>

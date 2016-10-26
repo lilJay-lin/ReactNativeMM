@@ -138,6 +138,12 @@ export default class MMScrollView extends Component {
     if (props.tabBarInactiveTextColor) {
       tabBarProps.inactiveTextColor = props.tabBarInactiveTextColor;
     }
+    if (props.tabBarTextStyle) {
+      tabBarProps.textStyle = props.tabBarTextStyle;
+    }
+    if (props.tabBarUnderlineStyle) {
+      tabBarProps.underlineStyle = props.tabBarUnderlineStyle;
+    }
     tabBarProps.style = {
       position: 'absolute',
       left: 0,
