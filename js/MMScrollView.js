@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import TabBar from './TabBar'
 import SceneComponent from './SceneComponent'
-
+var requestFrameId
 export default class MMScrollView extends Component {
   constructor (props) {
     super(props)
@@ -45,6 +45,23 @@ export default class MMScrollView extends Component {
   }
   _shouldRenderSceneKey () {
 
+  }
+  /*
+  * TODO:　rquestAnimationFrame增加队列管理
+  * */
+  _handleLayout(e) {
+    const rn = this
+    const {width} = e.nativeEvent.layout;
+    if (width !== rn.state.containerWidth) {
+      rn.setState({containerWidth: width});
+      requestFrameId && cancelAnimationFrame(requestFrameId)
+      requestFrameId = requestAnimationFrame(() => {
+        rn.goToPage(this.state.currentPage);
+      });
+    }
+  }
+  componentWillUnmount () {
+    requestFrameId && cancelAnimationFrame(requestFrameId)
   }
   _composeScenes () {
     const rn = this
@@ -153,7 +170,7 @@ export default class MMScrollView extends Component {
     }
     const padding = props.tabBarPosition === 'top' ? 'paddingTop' : 'paddingBottom'
     return (
-      <View style={[styles.scrollView, {[padding]: props.tabHeight}]}>
+      <View style={[styles.scrollView, {[padding]: props.tabHeight}]} onLayout={(e) => rn._handleLayout(e)}>
         {rn.renderScrollableContent()}
         {rn.renderTabBar(tabBarProps)}
       </View>
