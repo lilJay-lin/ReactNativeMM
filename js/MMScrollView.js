@@ -26,12 +26,15 @@ export default class MMScrollView extends Component {
     tabBarPosition: PropTypes.oneOf(['top', 'bottom', 'overlayTop', 'overlayBottom']),
     initialPage: PropTypes.number,
     onScroll: PropTypes.func,
-    locked: PropTypes.bool
+    locked: PropTypes.bool,
+    renderTabBar: PropTypes.any,
+    tabHeight: PropTypes.number
   }
   static defaultProps = {
     tabBarPosition: 'top',
     initialPage: 0,
     locked: false,
+    tabHeight: 50,
     onScroll () {}
   }
   _children (children = this.props.children) {
@@ -111,10 +114,17 @@ export default class MMScrollView extends Component {
     })
   }
   renderTabBar (props) {
-    return <TabBar {...props}></TabBar>
+    if (this.props.renderTabBar === false) {
+      return null;
+    } else if (this.props.renderTabBar) {
+      return this.props.renderTabBar(props)
+    } else {
+      return <TabBar {...props}></TabBar>
+    }
   }
   render () {
     const rn = this
+    const props = rn.props
     const tabBarProps = {
       goToPage: (page) => rn.goToPage(page),
       activeTab: rn.state.currentPage,
@@ -122,21 +132,23 @@ export default class MMScrollView extends Component {
       scrollValue: rn.state.scrollValue,
       containerWidth: rn.state.containerWidth
     }
-    if (this.props.tabBarActiveTextColor) {
-      tabBarProps.activeTextColor = rn.props.tabBarActiveTextColor;
+    if (props.tabBarActiveTextColor) {
+      tabBarProps.activeTextColor = props.tabBarActiveTextColor;
     }
-    if (this.props.tabBarInactiveTextColor) {
-      tabBarProps.inactiveTextColor = rn.props.tabBarInactiveTextColor;
+    if (props.tabBarInactiveTextColor) {
+      tabBarProps.inactiveTextColor = props.tabBarInactiveTextColor;
     }
     tabBarProps.style = {
       position: 'absolute',
       left: 0,
       right: 0,
-      [rn.props.tabBarPosition]: 0,
+      [props.tabBarPosition]: 0,
+      height: props.tabHeight
     }
+    const padding = props.tabBarPosition === 'top' ? 'paddingTop' : 'paddingBottom'
     return (
-      <View style={styles.scrollView}>
-        {this.renderScrollableContent()}
+      <View style={[styles.scrollView, {[padding]: props.tabHeight}]}>
+        {rn.renderScrollableContent()}
         {rn.renderTabBar(tabBarProps)}
       </View>
     )
