@@ -14,7 +14,20 @@ import {
   ScrollView
 } from 'react-native'
 import MMScrollView from './js/MMScrollView'
+import MMRefreshableListView from './js/MMRefreshableListView'
+import SingleLineApp from './js/SingleLineApp'
+import TopNav from './js/TopNav'
+import Banner from './js/Banner'
 export default class ReactNativeMM extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      banners: [
+        'http://fun.youth.cn/yl24xs/201609/W020160926358612422930.png',
+        'http://2t.5068.com/uploads/allimg/161001/1-1610010S524-50.jpg'
+      ]
+    }
+  }
   _handleLayout (e) {
     const {width, x, y, height} = e.nativeEvent.layout
   }
@@ -22,20 +35,26 @@ export default class ReactNativeMM extends Component {
     return (
       <View style={styles.container} onLayout = {this._handleLayout}>
         <MMScrollView locked={true} tabBarPosition='bottom'>
-          <ScrollView label="home">
-            <Text>sdfdsf</Text>
-            <View style={{height: 500, backgroundColor: '#000'}}></View>
-            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+          <ScrollView label="home" directionalLockEnabled>
+            <TopNav></TopNav>
+            <View style={{marginTop: 8}}></View>
+            <SingleLineApp></SingleLineApp>
+            <SingleLineApp></SingleLineApp>
+            <Banner pictures={this.state.banners}></Banner>
+            <View style={{marginTop: 8}}></View>
+            <SingleLineApp></SingleLineApp>
+            <SingleLineApp></SingleLineApp>
+            <View style={{marginTop: 8}}></View>
           </ScrollView>
           <View label="accout"  style={{flex: 1, backgroundColor: 'antiquewhite'}}>
             <MMScrollView >
-              <View style={{height: 100, paddingTop: 50}} label="1">
+              <View style={{height: 100}} label="1">
                 <Text>1234</Text>
               </View>
-              <View style={{height: 100, paddingTop: 50}} label="2">
+              <View style={{height: 100}} label="2">
                 <Text>1234</Text>
               </View>
-              <View style={{height: 100, paddingTop: 50}} label="3">
+              <View style={{height: 100}} label="3">
                 <Text>1234</Text>
               </View>
             </MMScrollView>
@@ -55,7 +74,7 @@ export default class ReactNativeMM extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#f0f0f0'
   },
   home: {
     height: 800,

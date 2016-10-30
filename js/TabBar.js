@@ -68,7 +68,7 @@ export default class TabBar extends Component {
         {
           props.tabs.map((name, page) => {
             const active = page === props.activeTab
-            return rn._renderTab(name, page, active, props.goToPage)
+            return props.renderTab ? props.renderTab(name, page, active, props.goToPage) : rn._renderTab(name, page, active, props.goToPage)
           })
         }
         <Animated.View style={[tabUnderlineStyle, { left}, props.underlineStyle ]} />
