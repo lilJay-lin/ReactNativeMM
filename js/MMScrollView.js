@@ -23,7 +23,7 @@ export default class MMScrollView extends Component {
     }
   }
   static propTypes = {
-    tabBarPosition: PropTypes.oneOf(['top', 'bottom', 'overlayTop', 'overlayBottom']),
+    tabBarPosition: PropTypes.oneOf(['top', 'bottom']),
     initialPage: PropTypes.number,
     onScroll: PropTypes.func,
     locked: PropTypes.bool,
