@@ -18,6 +18,7 @@ import MMRefreshableListView from './js/MMRefreshableListView'
 import SingleLineApp from './js/SingleLineApp'
 import TopNav from './js/TopNav'
 import Banner from './js/Banner'
+import MMTabHost from './js/MMTabHost'
 export default class ReactNativeMM extends Component {
   constructor(props){
     super(props)
@@ -31,15 +32,24 @@ export default class ReactNativeMM extends Component {
   _handleLayout (e) {
     const {width, x, y, height} = e.nativeEvent.layout
   }
+  renderTabBar (props) {
+    return <MMTabHost {...props}></MMTabHost>
+  }
   render() {
+    const tabHostProps = {
+      tabBarPosition: 'bottom',
+      locked: true,
+      renderTabBar: this.renderTabBar
+    }
     return (
-      <View style={styles.container} onLayout = {this._handleLayout}>
-        <MMScrollView locked={true} tabBarPosition='bottom'>
+      <View style={styles.container}onLayout = {this._handleLayout}>
+        <MMScrollView {...tabHostProps}>
           <ScrollView label="home" directionalLockEnabled>
             <TopNav></TopNav>
             <View style={{marginTop: 8}}></View>
             <SingleLineApp></SingleLineApp>
             <SingleLineApp></SingleLineApp>
+            <View style={{marginTop: 8}}></View>
             <Banner pictures={this.state.banners}></Banner>
             <View style={{marginTop: 8}}></View>
             <SingleLineApp></SingleLineApp>
@@ -63,6 +73,9 @@ export default class ReactNativeMM extends Component {
             <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
           </ScrollView>
           <ScrollView label="soft">
+            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+          </ScrollView>
+          <ScrollView label="main">
             <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
           </ScrollView>
         </MMScrollView>
