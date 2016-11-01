@@ -4,8 +4,6 @@
 import React, {Component, PropTypes} from 'react'
 import {
   View,
-  Text,
-  Image,
   StyleSheet
 } from 'react-native'
 import TabBar from './TabBar'
@@ -25,7 +23,7 @@ export default class BannerDirector extends Component{
   render(){
     const tabStyle = {
       style: styles.tabStyle,
-      underlineStyle: styles.tabUnderlineStyle,
+      noUnderline: true,
       renderTab: this._renderTab
     }
     return (
@@ -56,9 +54,5 @@ const styles = StyleSheet.create({
   },
   inactive: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  tabUnderlineStyle: {
-    height: 0,
-    width: 0
   }
 })

@@ -25,12 +25,14 @@ export default class TabBar extends Component {
     tabStyle: View.propTypes.style,
     renderTab: React.PropTypes.func,
     underlineStyle: View.propTypes.style,
+    noUnderline: PropTypes.bool,
     textStyle: View.propTypes.style
   }
   static defaultProps  = {
     activeTextColor: 'navy',
     inactiveTextColor: 'black',
-    backgroundColor: null
+    backgroundColor: null,
+    noUnderline: false
   }
   _renderTab (name, page, active, onPressHandle) {
     const {activeTextColor, inactiveTextColor, textStyle} = this.props
@@ -53,16 +55,20 @@ export default class TabBar extends Component {
     const props = rn.props
     const containerWidth = rn.props.containerWidth;
     const numberOfTabs = rn.props.tabs.length;
-    const tabUnderlineStyle = {
-      position: 'absolute',
-      width: containerWidth / numberOfTabs,
-      height: 4,
-      backgroundColor: 'navy',
-      bottom: 0
+    let underline = null
+    if (props.noUnderline === false){
+      const tabUnderlineStyle = {
+        position: 'absolute',
+        width: containerWidth / numberOfTabs,
+        height: 4,
+        backgroundColor: 'navy',
+        bottom: 0
+      }
+      const left = props.scrollValue.interpolate({
+        inputRange: [0, 1], outputRange: [0,  containerWidth / numberOfTabs]
+      })
+      underline = <Animated.View style={[tabUnderlineStyle, { left}, props.underlineStyle ]} />
     }
-    const left = props.scrollValue.interpolate({
-      inputRange: [0, 1], outputRange: [0,  containerWidth / numberOfTabs]
-    })
     return (
       <View style={[styles.tabs, props.style]}>
         {
@@ -71,7 +77,7 @@ export default class TabBar extends Component {
             return props.renderTab ? props.renderTab(name, page, active, props.goToPage) : rn._renderTab(name, page, active, props.goToPage)
           })
         }
-        <Animated.View style={[tabUnderlineStyle, { left}, props.underlineStyle ]} />
+        {underline}
       </View>
     );
   }

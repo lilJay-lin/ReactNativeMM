@@ -41,15 +41,20 @@ export default class Banner extends Component{
       tabHeight: 0,
       renderTabBar: this.renderTabBar
     }
+    const imageStyle = {
+      width: containerWidth,
+      height: height,
+      resizeMode: 'cover'
+    }
     return (
-      <View style={{height: height}} onLayout={(e) => this._handleLayout(e)}>
+      <View style={[styles.banner, {height: height}]} onLayout={(e) => this._handleLayout(e)}>
         <MMScrollView {...scrollProps}>
           {
             this.props.pictures.map((img, idx) => {
-              let key = 'banner_item' + idx
+              let key = 'banner_item' + idx + containerWidth
               return (
-                <Button label={key}  key={key} >
-                  <Image style={[{width: containerWidth, height: height}]} source={{uri: img}} ></Image>
+                <Button label={key}  key={key} style={{height: height}}>
+                  <Image style={imageStyle} source={{uri: img}} ></Image>
                 </Button>
               )
             })
