@@ -19,6 +19,7 @@ import SingleLineApp from './js/SingleLineApp'
 import TopNav from './js/TopNav'
 import Banner from './js/Banner'
 import MMTabHost from './js/MMTabHost'
+import MMToolbar from './js/MMToolbar'
 export default class ReactNativeMM extends Component {
   constructor(props){
     super(props)
@@ -44,7 +45,11 @@ export default class ReactNativeMM extends Component {
     return (
       <View style={styles.container}onLayout = {this._handleLayout}>
         <MMScrollView {...tabHostProps}>
-          <ScrollView label="home" directionalLockEnabled>
+          <ScrollView
+            label="home"
+            directionalLockEnabled
+            showsVerticalScrollIndicator={false}>
+            <MMToolbar></MMToolbar>
             <TopNav></TopNav>
             <View style={{marginTop: 8}}></View>
             <SingleLineApp></SingleLineApp>
@@ -70,13 +75,13 @@ export default class ReactNativeMM extends Component {
             </MMScrollView>
           </View>
           <ScrollView label="game">
-            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+            <View style={{height: 300, backgroundColor: 'cornsilk'}}></View>
           </ScrollView>
           <ScrollView label="soft">
-            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+            <View style={{height: 300, backgroundColor: 'ivory'}}></View>
           </ScrollView>
           <ScrollView label="main">
-            <View style={{height: 300, backgroundColor: 'antiquewhite'}}></View>
+            <View style={{height: 300, backgroundColor: 'beige'}}></View>
           </ScrollView>
         </MMScrollView>
       </View>
