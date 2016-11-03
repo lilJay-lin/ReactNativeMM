@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   info: {
+    height: 50,
     flex: 1,
     justifyContent: 'space-between'
   },

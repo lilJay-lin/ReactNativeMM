@@ -14,21 +14,16 @@ import {
   ScrollView
 } from 'react-native'
 import MMScrollView from './js/MMScrollView'
-import MMRefreshableListView from './js/MMRefreshableListView'
-import SingleLineApp from './js/SingleLineApp'
-import TopNav from './js/TopNav'
-import Banner from './js/Banner'
 import MMTabHost from './js/MMTabHost'
-import MMToolbar from './js/MMToolbar'
+import MMRefreshableListView from './js/MMRefreshableListView'
+import MMGameTabBar from './js/MMGameTabBar'
+import MMGame from './js/MMGame'
+import MMChoice from './js/MMChoice'
+import MMEnjoy from './js/MMEnjoy'
+import MMSoft from './js/MMSoft'
 export default class ReactNativeMM extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      banners: [
-        'http://fun.youth.cn/yl24xs/201609/W020160926358612422930.png',
-        'http://2t.5068.com/uploads/allimg/161001/1-1610010S524-50.jpg'
-      ]
-    }
   }
   _handleLayout (e) {
     const {width, x, y, height} = e.nativeEvent.layout
@@ -45,44 +40,13 @@ export default class ReactNativeMM extends Component {
     return (
       <View style={styles.container}onLayout = {this._handleLayout}>
         <MMScrollView {...tabHostProps}>
-          <ScrollView
-            label="home"
-            directionalLockEnabled
-            showsVerticalScrollIndicator={false}>
-            <MMToolbar></MMToolbar>
-            <TopNav></TopNav>
-            <View style={{marginTop: 8}}></View>
-            <SingleLineApp></SingleLineApp>
-            <SingleLineApp></SingleLineApp>
-            <View style={{marginTop: 8}}></View>
-            <Banner pictures={this.state.banners}></Banner>
-            <View style={{marginTop: 8}}></View>
-            <SingleLineApp></SingleLineApp>
-            <SingleLineApp></SingleLineApp>
-            <View style={{marginTop: 8}}></View>
-          </ScrollView>
-          <View label="accout"  style={{flex: 1, backgroundColor: 'antiquewhite'}}>
-            <MMScrollView >
-              <View style={{height: 100}} label="1">
-                <Text>1234</Text>
-              </View>
-              <View style={{height: 100}} label="2">
-                <Text>1234</Text>
-              </View>
-              <View style={{height: 100}} label="3">
-                <Text>1234</Text>
-              </View>
-            </MMScrollView>
+          <MMChoice label="choice"></MMChoice>
+          <MMSoft label="soft"></MMSoft>
+          <MMGame label="game"></MMGame>
+          <MMEnjoy label="enjoy"></MMEnjoy>
+          <View style={styles.flex} label="account">
+
           </View>
-          <ScrollView label="game">
-            <View style={{height: 300, backgroundColor: 'cornsilk'}}></View>
-          </ScrollView>
-          <ScrollView label="soft">
-            <View style={{height: 300, backgroundColor: 'ivory'}}></View>
-          </ScrollView>
-          <ScrollView label="main">
-            <View style={{height: 300, backgroundColor: 'beige'}}></View>
-          </ScrollView>
         </MMScrollView>
       </View>
     );
@@ -93,6 +57,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f0f0'
+  },
+  flex: {
+    flex: 1
   },
   home: {
     height: 800,

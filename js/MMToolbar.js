@@ -11,9 +11,15 @@ import {
   Dimensions
 } from 'react-native'
 export default class MMToolbar extends Component{
+  constructor(props){
+    super(props)
+  }
+  static propTypes = {
+    style: View.propTypes.style
+  }
   render () {
     return (
-      <View style={styles.toolbar}>
+      <View style={[styles.toolbar, this.props.style]}>
         <Image source={require('../images/11.png')} style={styles.userImage}></Image>
         <View style={styles.search}>
           <Image source={require('../images/9.png')} style={styles.searchIcon}></Image>
@@ -39,7 +45,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 5,
     backgroundColor: '#ffffff',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#eaeaea',
   },
   userImage: {
     width: 32,
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     height: 36,
-    borderWidth: 3,
+    borderWidth: 1,
     borderColor: '#cccccc',
     borderRadius: 10,
     alignItems: 'center',

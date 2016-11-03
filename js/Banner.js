@@ -43,8 +43,7 @@ export default class Banner extends Component{
     }
     const imageStyle = {
       width: containerWidth,
-      height: height,
-      resizeMode: 'cover'
+      height: height
     }
     return (
       <View style={[styles.banner, {height: height}]} onLayout={(e) => this._handleLayout(e)}>
@@ -53,8 +52,8 @@ export default class Banner extends Component{
             this.props.pictures.map((img, idx) => {
               let key = 'banner_item' + idx + containerWidth
               return (
-                <Button label={key}  key={key} style={{height: height}}>
-                  <Image style={imageStyle} source={{uri: img}} ></Image>
+                <Button label={key}  key={key} style={imageStyle}>
+                  <Image style={[imageStyle, {resizeMode: 'cover'}]} source={{uri: img}} ></Image>
                 </Button>
               )
             })

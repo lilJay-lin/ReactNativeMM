@@ -26,7 +26,7 @@ export default class TabBar extends Component {
     renderTab: React.PropTypes.func,
     underlineStyle: View.propTypes.style,
     noUnderline: PropTypes.bool,
-    textStyle: View.propTypes.style
+    textStyle: Text.propTypes.style
   }
   static defaultProps  = {
     activeTextColor: 'navy',

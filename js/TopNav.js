@@ -61,11 +61,9 @@ export default class TopNav extends Component{
 
 const styles = StyleSheet.create({
   topNav: {
-    flex: 1,
     flexDirection: 'row',
     height: 70,
     borderBottomWidth: 1,
-    borderTopWidth: 1,
     borderStyle: 'solid',
     borderColor: '#eaeaea',
     backgroundColor: '#ffffff'
