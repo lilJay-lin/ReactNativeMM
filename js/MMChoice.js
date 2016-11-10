@@ -12,6 +12,9 @@ import SingleLineApp from './SingleLineApp'
 import TopNav from './TopNav'
 import Banner from './Banner'
 import MMToolbar from './MMToolbar'
+import MMTwoUnitCard from  './MMTwoUnitCard'
+import MMBigCard from './MMBigCard'
+import MMTopicCard from './MMTopicCard'
 export default class MMGame extends Component{
   constructor(props){
     super(props)
@@ -23,22 +26,30 @@ export default class MMGame extends Component{
     }
   }
   render(){
+    let navigator = this.props.navigator
     return (
       <View style={styles.flex}>
         <MMToolbar></MMToolbar>
         <ScrollView
           label="home"
           directionalLockEnabled
-          showsVerticalScrollIndicator={false}>
-          <TopNav></TopNav>
-          <View style={{marginTop: 8}}></View>
-          <SingleLineApp></SingleLineApp>
-          <SingleLineApp></SingleLineApp>
-          <View style={{marginTop: 8}}></View>
+          showsVerticalScrollIndicator={false}
+          automaticallyAdjustContentInsets={false}>
           <Banner pictures={this.state.banners}></Banner>
+          <TopNav navigator={navigator}></TopNav>
           <View style={{marginTop: 8}}></View>
-          <SingleLineApp></SingleLineApp>
-          <SingleLineApp></SingleLineApp>
+          <MMTopicCard navigator={navigator}></MMTopicCard>
+          <View style={{marginTop: 8}}></View>
+          <MMBigCard navigator={navigator}></MMBigCard>
+          <View style={{marginTop: 8}}></View>
+          <MMTwoUnitCard navigator={navigator}></MMTwoUnitCard>
+          <View style={{marginTop: 8}}></View>
+          <SingleLineApp navigator={navigator}></SingleLineApp>
+          <SingleLineApp navigator={navigator}></SingleLineApp>
+          <View style={{marginTop: 8}}></View>
+          <View style={{marginTop: 8}}></View>
+          <SingleLineApp navigator={navigator}></SingleLineApp>
+          <SingleLineApp navigator={navigator}></SingleLineApp>
           <View style={{marginTop: 8}}></View>
         </ScrollView>
       </View>

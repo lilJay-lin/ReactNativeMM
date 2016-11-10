@@ -6,38 +6,37 @@ import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native'
 import Label from './Label'
 import DownloadButton from './DownloadButton'
-export default class MMTopicCard extends Component{
+import server from './server'
+import MMComponent from './MMComponent'
+export default class MMTopicCard extends MMComponent{
   render(){
+    const items = ([1, 1, 1]).map(() => {
+      const item = server.getItem()
+      item.size = server.getSize()
+      return (
+        <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext()} key={item.contentId}>
+          <Image  style={styles.logo} source={{uri: item.iconurl}}></Image>
+          <Text style={styles.topicItemName} numberOfLines={1}>{item.name}</Text>
+          <Text style={styles.topicItemSize}>{item.size}M</Text>
+          <DownloadButton></DownloadButton>
+        </TouchableOpacity>
+      )
+    })
+    const card = server.getCard()
     return (
       <View style={styles.topic}>
-        <Label text="专题" labelStyle={styles.labelStyle}></Label>
+        <Label text={card.marktext} labelStyle={styles.labelStyle}></Label>
         <View style={styles.topicHd}>
-          <Text>团购</Text>
-          <Text>开启神奇的魔幻之旅</Text>
+          <Text>{card.name}</Text>
+          <Text>{card.slogan}</Text>
         </View>
         <View style={styles.topicBody}>
-          <View style={styles.topicItem}>
-            <Image  style={styles.logo} source={require('../images/1.png')}></Image>
-            <Text style={styles.topicItemName}>美团</Text>
-            <Text style={styles.topicItemSize}>35.66M</Text>
-            <DownloadButton></DownloadButton>
-          </View>
-          <View style={styles.topicItem}>
-            <Image  style={styles.logo} source={require('../images/1.png')}></Image>
-            <Text style={styles.topicItemName}>美团</Text>
-            <Text style={styles.topicItemSize}>35.66M</Text>
-            <DownloadButton></DownloadButton>
-          </View>
-          <View style={styles.topicItem}>
-            <Image  style={styles.logo} source={require('../images/1.png')}></Image>
-            <Text style={styles.topicItemName}>美团</Text>
-            <Text style={styles.topicItemSize}>35.66M</Text>
-            <DownloadButton></DownloadButton>
-          </View>
+          {items}
         </View>
       </View>
     )
@@ -78,7 +77,9 @@ const styles = StyleSheet.create({
   },
   topicItemName: {
     fontSize: 14,
-    color: '#333333'
+    color: '#333333',
+    textAlign: 'center',
+    paddingHorizontal: 10
   },
   topicItemSize: {
     fontSize: 11,

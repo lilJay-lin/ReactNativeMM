@@ -7,53 +7,35 @@ import {
   Text,
   Image,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
 import Button from './Button'
-
-export default class TopNav extends Component{
+import MMComponent from './MMComponent'
+export default class TopNav extends MMComponent{
   render(){
     return (
       <View style={styles.topNav}>
-        <ScrollView
-          horizontal
-          automaticallyAdjustContentInsets={false}
-          showsHorizontalScrollIndicator={false}
-          directionalLockEnabled
-          contentContainerStyle={{paddingRight: 15}}>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/3.png')}></Image>
-            <Text style={styles.itemLabel}>首发</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/4.png')}></Image>
-            <Text style={styles.itemLabel}>网游</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/5.png')}></Image>
-            <Text style={styles.itemLabel}>全部</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/6.png')}></Image>
-            <Text style={styles.itemLabel}>必备</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/7.png')}></Image>
-            <Text style={styles.itemLabel}>应用PK</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/5.png')}></Image>
-            <Text style={styles.itemLabel}>全部</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/6.png')}></Image>
-            <Text style={styles.itemLabel}>必备</Text>
-          </View>
-          <View style={styles.item}>
-            <Image style={styles.itemLogo} source={require('../images/7.png')}></Image>
-            <Text style={styles.itemLabel}>应用PK</Text>
-          </View>
-        </ScrollView>
+        <TouchableOpacity style={styles.item} onPress = {() => this.gotoNext()}>
+          <Image style={styles.itemLogo} source={require('../images/3.png')}></Image>
+          <Text style={styles.itemLabel}>首发</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress = {() => this.gotoNext()}>
+          <Image style={styles.itemLogo} source={require('../images/4.png')}></Image>
+          <Text style={styles.itemLabel}>网游</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress = {() => this.gotoNext()}>
+          <Image style={styles.itemLogo} source={require('../images/5.png')}></Image>
+          <Text style={styles.itemLabel}>全部</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress = {() => this.gotoNext()}>
+          <Image style={styles.itemLogo} source={require('../images/6.png')}></Image>
+          <Text style={styles.itemLabel}>必备</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.item} onPress = {() => this.gotoNext()}>
+          <Image style={styles.itemLogo} source={require('../images/7.png')}></Image>
+          <Text style={styles.itemLabel}>应用PK</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -71,8 +53,7 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     width: 38,
-    alignItems: 'center',
-    marginLeft: 15
+    alignItems: 'center'
   },
   itemLogo: {
     marginTop: 5,

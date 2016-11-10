@@ -9,9 +9,40 @@ import {
   StyleSheet
 } from 'react-native'
 import Button from './Button'
+import server from './server'
+import MMDetailList from './MMDetailList'
 
 export default class SingleLineApp extends Component{
+
+  /**
+   * 跳转页面至SecondPage
+   * @param name 传递参数
+   * @param type 动画类型
+   */
+  gotoNext(title, component) {
+    this.props.navigator.push({
+      component: component,
+      passProps: {},
+      title: title
+    })
+  }
   render(){
+    /*
+    *
+    * {
+     "name": "博雅斗牛",
+     "interested": "60万+下载",
+     "appuid": "com.boyaa.bullfight.mmarket",
+     "contentid": "300008222044",
+     "iconurl": "http://u5.mm-img.mmarket.com:80/rs/res2/21/2016/11/07/a219/281/49281219/logo120x1208507760955-png8.png",
+     "appsize": 16939,
+     "detailurl": "http://odp.mmarket.com/t.do?requestid=app_info_forward_v2&spm=null&goodsid=0000x8627289836100007246012300008222044&share=true",
+     "orderurl": "http://apk.mmarket.com/cdn/rs/prepublish_open20/23/2016/08/31/a638/892/48892638/crazybull_mm_2.8.0_300008222044_0000000002.apk?cid=300008222044&gid=0000x8627289836100007246012300008222044&MD5=9bfb9b472b9105e3e470fc0be15d5731&ts=201611101740&tk=9A5E&v=1",
+     "slogan": "只要你敢来，话费我买单！"
+     }
+     */
+    const app = server.getItem()
+    const label = Math.floor(Math.random()) > 0 ? "首发" : "赚流量"
 /*    return (
       <Button>
         <View style={styles.app}>
@@ -36,24 +67,22 @@ export default class SingleLineApp extends Component{
     )*/
 
     return (
-      <Button>
+      <Button onPress = {() => this.gotoNext('详情页', MMDetailList)}>
         <View style={styles.app}>
           <View style={styles.logoWrapper}>
             <Image style={styles.label} source={require('../images/2.png')}>
-              <Text style={styles.labelText}>赚流量</Text>
+              <Text style={styles.labelText}>{label}</Text>
             </Image>
-            <Image style={styles.logo} source={require('../images/1.png')}></Image>
+            <Image style={styles.logo} source={{uri: app.iconurl}}></Image>
           </View>
           <View style={styles.info}>
             <View style={styles.flex}>
-              <Text style={styles.infoTitle}>龙珠ol</Text>
+              <Text style={styles.infoTitle}>{app.name}</Text>
               <Text style={[styles.appLabel, {backgroundColor: '#ff7800'}]}>评测</Text>
             </View>
-            <Text style={styles.infoDownload}>3万+感兴趣 </Text>
+            <Text style={styles.infoDownload}>{app.interested}</Text>
             <View style={styles.flex}>
-              <Text style={[styles.appLabel2, {color: '#ff91cd', borderColor: '#ff91cd'}]}>神奇宝贝</Text>
-              <Text style={[styles.appLabel2, {color: '#90d557', borderColor: '#90d557'}]}>钢琴百块</Text>
-              <Text style={[styles.appLabel2, {color: '#63d1ff', borderColor: '#63d1ff'}]}>策略</Text>
+              <Text style={styles.infoDownload}>{app.slogan}</Text>
             </View>
           </View>
           <Button>

@@ -19,7 +19,7 @@ export default class DownloadButton extends Component{
   render(){
     return (
       <View style={[styles.btn, this.props.btnStyle]}>
-        <Text style={styles.btnText}>{this.props.text}</Text>
+        <Text style={[styles.btnText, this.props.btnTextStyle]}>{this.props.text}</Text>
       </View>
     )
   }
