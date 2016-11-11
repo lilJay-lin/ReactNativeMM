@@ -20,7 +20,7 @@ export default class MMToolbar extends Component{
   render () {
     return (
       <View style={[styles.toolbar, this.props.style]}>
-        <Image source={require('../images/11.png')} style={styles.userImage}></Image>
+        <Image source={{uri: 'http://mmdm.aspire-tech.com/fx/demo/rn/13.png'}} style={styles.userImage}></Image>
         <View style={styles.search}>
           <Image source={require('../images/9.png')} style={styles.searchIcon}></Image>
           <View style={styles.inputField}>

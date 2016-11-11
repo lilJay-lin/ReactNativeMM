@@ -18,7 +18,7 @@ export default class MMTwoUnitCard extends MMComponent{
     const items = (server.getItem(2)).map((item) => {
       item.size = server.getSize()
       return (
-        <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext()} key={item.contentId}>
+        <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext(item.name, 1)} key={item.contentId}>
           <View style={styles.flex}>
             <Label text="首发" labelStyle={styles.label}></Label>
             <Image  style={styles.logo} source={{uri: item.iconurl}}></Image>

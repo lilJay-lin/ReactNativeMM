@@ -20,8 +20,8 @@ export default class MMGame extends Component{
     super(props)
     this.state = {
       banners: [
-        'http://fun.youth.cn/yl24xs/201609/W020160926358612422930.png',
-        'http://2t.5068.com/uploads/allimg/161001/1-1610010S524-50.jpg'
+        'http://mmdm.aspire-tech.com/fx/demo/rn/9.png',
+        'http://mmdm.aspire-tech.com/fx/demo/rn/3.png'
       ]
     }
   }
@@ -35,7 +35,7 @@ export default class MMGame extends Component{
           directionalLockEnabled
           showsVerticalScrollIndicator={false}
           automaticallyAdjustContentInsets={false}>
-          <Banner pictures={this.state.banners}></Banner>
+          <Banner pictures={this.state.banners} navigator={navigator}></Banner>
           <TopNav navigator={navigator}></TopNav>
           <View style={{marginTop: 8}}></View>
           <MMTopicCard navigator={navigator}></MMTopicCard>

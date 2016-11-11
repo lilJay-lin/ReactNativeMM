@@ -20,9 +20,9 @@ export default class MMDetailList extends Component{
     }
     componentDidMount (){
       this.setState({
-        items: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map(() => {
+        items: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].map((item, i) => {
           return (
-            <SingleLineApp navigator={this.props.navigator}  key={item.contentId}></SingleLineApp>
+            <SingleLineApp navigator={this.props.navigator}  key={i}></SingleLineApp>
           )
         })
       })
@@ -47,6 +47,7 @@ export default class MMDetailList extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+      backgroundColor: '#f0f0f0'
     }
 })

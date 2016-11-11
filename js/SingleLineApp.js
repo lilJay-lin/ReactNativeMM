@@ -11,21 +11,9 @@ import {
 import Button from './Button'
 import server from './server'
 import MMDetailList from './MMDetailList'
+import MMComponent from './MMComponent'
 
-export default class SingleLineApp extends Component{
-
-  /**
-   * 跳转页面至SecondPage
-   * @param name 传递参数
-   * @param type 动画类型
-   */
-  gotoNext(title, component) {
-    this.props.navigator.push({
-      component: component,
-      passProps: {},
-      title: title
-    })
-  }
+export default class SingleLineApp extends MMComponent{
   render(){
     /*
     *
@@ -67,7 +55,7 @@ export default class SingleLineApp extends Component{
     )*/
 
     return (
-      <Button onPress = {() => this.gotoNext('详情页', MMDetailList)}>
+      <Button onPress = {() => this.gotoNext(app.name, 1)}>
         <View style={styles.app}>
           <View style={styles.logoWrapper}>
             <Image style={styles.label} source={require('../images/2.png')}>

@@ -17,7 +17,7 @@ export default class MMBigCard extends MMComponent{
   render(){
     const item = server.getItem()
     return (
-      <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext()}>
+      <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext(item.name, 1)}>
         <Label text="首发" labelStyle={styles.label}></Label>
         <Image  style={styles.logo} source={{uri: item.iconurl}}></Image>
         <Text style={styles.topicItemName}>{item.name}</Text>

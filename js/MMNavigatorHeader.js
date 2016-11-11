@@ -21,13 +21,13 @@ export default class MMNavigatorHeader extends Component{
            <TouchableOpacity
              underlayColor='transparent'
              onPress={() => {this._goBack()}}>
-             <Text style={styles.leftNavButtonText}>
-               返回
-             </Text>
+             <View style={{flex: 1, width: 50, paddingLeft: 20, paddingTop: 5,alignItem: 'center'}}>
+               <Image source={{uri: 'http://mmdm.aspire-tech.com/fx/demo/rn/27.png'}} style={styles.backImage}></Image>
+             </View>
            </TouchableOpacity>
          </View>
          <View style={styles.titleView}>
-           <Text style={styles.title}>
+           <Text style={styles.title} numberOfLines={1}>
              {this.props.title || "页面标题"}
            </Text>
          </View>
@@ -39,6 +39,11 @@ export default class MMNavigatorHeader extends Component{
    }
 }
 const styles = StyleSheet.create({
+  backImage: {
+    width: 18,
+    height: 18,
+    resizeMode: 'contain'
+  },
   header: {
     height: 50,
     flexDirection: 'row',
@@ -51,12 +56,12 @@ const styles = StyleSheet.create({
   leftView: {
     paddingVertical: 10,
     backgroundColor: '#fff',
-    width: 100
+    width: 60
   },
   rightView: {
     paddingVertical: 10,
     backgroundColor: '#fff',
-    width: 100
+    width: 60
   },
   titleView: {
     paddingVertical: 10,

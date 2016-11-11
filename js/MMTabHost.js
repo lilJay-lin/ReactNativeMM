@@ -19,24 +19,24 @@ export default class MMTabHost extends Component{
   static defaultProps = {
     config: [
       {
-        img: 'http://imgsrc.baidu.com/forum/pic/item/fa9025338744ebf8ccf1ed96d9f9d72a6259a78c.jpg',
-        active: 'http://imgsrc.baidu.com/forum/pic/item/ac9d7cfbb2fb4316af9ff3d320a446230bf7d38c.jpg'
+        img: 'http://mmdm.aspire-tech.com/fx/demo/rn/22.png',
+        active: 'http://mmdm.aspire-tech.com/fx/demo/rn/4.png'
       },
       {
-        img: 'http://imgsrc.baidu.com/forum/pic/item/deba09a4462309f757ef24bb720e0cf3d5cad68c.jpg',
-        active: 'http://imgsrc.baidu.com/forum/pic/item/ac9d7cfbb2fb4316af9ff3d320a446230bf7d38c.jpg'
+        img: 'http://mmdm.aspire-tech.com/fx/demo/rn/5.png',
+        active: 'http://mmdm.aspire-tech.com/fx/demo/rn/21.png'
       },
       {
-        img: 'http://imgsrc.baidu.com/forum/pic/item/fa9025338744ebf8ccf1ed96d9f9d72a6259a78c.jpg',
-        active: 'http://imgsrc.baidu.com/forum/pic/item/ac9d7cfbb2fb4316af9ff3d320a446230bf7d38c.jpg'
+        img: 'http://mmdm.aspire-tech.com/fx/demo/rn/6.png',
+        active: 'http://mmdm.aspire-tech.com/fx/demo/rn/23.png'
       },
       {
-        img: 'http://imgsrc.baidu.com/forum/pic/item/ac9d7cfbb2fb4316af9ff3d320a446230bf7d38c.jpg',
-        active: 'http://imgsrc.baidu.com/forum/pic/item/deba09a4462309f757ef24bb720e0cf3d5cad68c.jpg'
+        img: 'http://mmdm.aspire-tech.com/fx/demo/rn/7.png',
+        active: 'http://mmdm.aspire-tech.com/fx/demo/rn/24.png'
       },
       {
-        img: 'http://imgsrc.baidu.com/forum/pic/item/fa9025338744ebf8ccf1ed96d9f9d72a6259a78c.jpg',
-        active: 'http://imgsrc.baidu.com/forum/pic/item/deba09a4462309f757ef24bb720e0cf3d5cad68c.jpg'
+        img: 'http://mmdm.aspire-tech.com/fx/demo/rn/8.png',
+        active: 'http://mmdm.aspire-tech.com/fx/demo/rn/20.png'
       }
     ]
   }
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   tabImage: {
     width: 35,
     height: 42,
-    marginTop: 3
+    marginTop: 3,
+    resizeMode: 'contain'
   }
 })

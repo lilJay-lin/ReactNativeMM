@@ -11,19 +11,43 @@ import {
 } from 'react-native'
 import DownloadButton from './DownloadButton'
 import MMNavigatorHeader from './MMNavigatorHeader'
+import server from './server'
 export default class MMDetail extends Component{
     render(){
+        /*
+        *
+         {
+         "appName": "欢乐斗地主",
+         "iconUrl": "http://u5.mm-img.mmarket.com:80/rs/res2/21/2016/10/28/a497/234/49234497/logo120x1207615089820-png8.png",
+         "contentId": "300008993578",
+         "categoryurl": "mm://categorydetail?requestid=app_list_mm4.1&parentId=678936540&seqtype=hotlist&needNewActivity=true&defaultType=1",
+         "category": "游戏>棋牌游戏",
+         "slogan": "不花一分钱也能欢乐斗地主",
+         "editorialReviews": "欢乐斗地主国民经典游戏再现，好玩速度快，全场零流量，装机必备，极力推荐！",
+         "interested": "400万+下载",
+         "providerId": "",
+         "description": "《欢乐斗地主》是当前最好玩的欢乐斗地主游戏，由顶级设计倾力打造，游戏画面精美，节奏快，玩法简单，欢乐性强！\r\n1.无须登录、无须注册、下载即玩。\r\n2.游戏共有3个模式：自由对战、无限翻倍和残局破解\r\n3.清新典雅的风格，原汁原味的棋牌享受；\r\n4.超大牌面让您运指如飞，远离误操作的烦恼；",
+         "thumbnails": [
+         "http://u5.mm-img.mmarket.com/rs/res2/21/2015/08/18/a091/267/45267091/picture198x3309863542456.jpg",
+         "http://u5.mm-img.mmarket.com/rs/res2/21/2015/08/18/a095/267/45267095/picture198x3309863545000.jpg",
+         "http://u5.mm-img.mmarket.com/rs/res2/21/2015/08/18/a099/267/45267099/picture198x3309863545925.jpg",
+         "http://u5.mm-img.mmarket.com/rs/res2/21/2015/08/18/a103/267/45267103/picture198x3309863548593.jpg"
+         ],
+         "orderUrl": "http://apk.mmarket.com/cdn/rs/prepublish_open21/23/2016/10/28/a458/235/49235458/com.i3game.hlddz_mm_1.8.10_90_300008993578_0000000002.apk?cid=300008993578&gid=0000x8627347801100008014793300008993578&MD5=71ce4364fc3bd8c040b8049944575856&ts=201611101751&tk=338C&v=1"
+         },
+        * */
+        const detail = server.getDetail()
        const navigator = this.props.navigator
        return (
          <View style={styles.container}>
-             <MMNavigatorHeader navigator={navigator} title={this.props.title}></MMNavigatorHeader>
+             <MMNavigatorHeader navigator={navigator} title={detail.appName}></MMNavigatorHeader>
              <ScrollView
                directionalLockEnabled
                showsVerticalScrollIndicator={false}
                automaticallyAdjustContentInsets={false}>
                  <View style={styles.item}>
-                     <Image  style={styles.logo} source={require('../images/1.png')}></Image>
-                     <Text style={styles.topicItemName}>美团</Text>
+                     <Image  style={styles.logo} source={{uri: detail.iconUrl}}></Image>
+                     <Text style={styles.topicItemName}>{detail.appName}</Text>
                      <Text style={styles.topicItemSize}>35.66M</Text>
                  </View>
                  <View style={styles.itemImages}>
@@ -33,15 +57,19 @@ export default class MMDetail extends Component{
                        automaticallyAdjustContentInsets={false}
                        showsHorizontalScrollIndicator={false}>
                          <View style={styles.images}>
-                             <Image source={require('../images/1.png')} style={styles.image}></Image>
-                             <Image source={require('../images/1.png')} style={styles.image}></Image>
-                             <Image source={require('../images/1.png')} style={styles.image}></Image>
-                             <Image source={require('../images/1.png')} style={styles.image}></Image>
+                             {
+                               detail.thumbnails.map((url) => {
+                                   return (
+                                     <Image source={{uri: url}} style={styles.image}></Image>
+                                   )
+                               })
+                             }
                          </View>
                      </ScrollView>
                  </View>
                  <View style={styles.desc}>
                      <Text>简介介绍</Text>
+                     <Text>{detail.description}</Text>
                  </View>
              </ScrollView>
              <View style={styles.download}>
@@ -54,7 +82,8 @@ export default class MMDetail extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#f0f0f0'
     },
     logo: {
         width: 50,

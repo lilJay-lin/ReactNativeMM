@@ -17,7 +17,7 @@ import MMTwoUnitCard from  './MMTwoUnitCard'
 import MMBigCard from './MMBigCard'
 import MMTopicCard from './MMTopicCard'
 import MMGameTabBar from './MMGameTabBar'
-export default class MMGame extends Component{
+export default class MMSoft extends Component{
   renderTabBar (props) {
     return <MMGameTabBar {...props}></MMGameTabBar>
   }

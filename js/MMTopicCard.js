@@ -19,7 +19,7 @@ export default class MMTopicCard extends MMComponent{
       const item = server.getItem()
       item.size = server.getSize()
       return (
-        <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext()} key={item.contentId}>
+        <TouchableOpacity style={styles.topicItem} onPress = {() => this.gotoNext(item.name, 1)} key={item.contentId}>
           <Image  style={styles.logo} source={{uri: item.iconurl}}></Image>
           <Text style={styles.topicItemName} numberOfLines={1}>{item.name}</Text>
           <Text style={styles.topicItemSize}>{item.size}M</Text>

@@ -13,8 +13,9 @@ import {
 import MMScrollView from './MMScrollView'
 import Button from './Button'
 import BannerDirector from './BannerDirector'
+import MMComponent from './MMComponent'
 
-export default class Banner extends Component{
+export default class Banner extends MMComponent{
   constructor(props){
     super(props)
     this.state = {
@@ -52,7 +53,7 @@ export default class Banner extends Component{
             this.props.pictures.map((img, idx) => {
               let key = 'banner_item' + idx + containerWidth
               return (
-                <Button label={key}  key={key} style={imageStyle}>
+                <Button label={key}  key={key} style={imageStyle} onPress = {() => this.gotoNext('推荐游戏')}>
                   <Image style={[imageStyle, {resizeMode: 'cover'}]} source={{uri: img}} ></Image>
                 </Button>
               )
