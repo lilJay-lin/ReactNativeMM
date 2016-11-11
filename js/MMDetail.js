@@ -53,7 +53,6 @@ export default class MMDetail extends Component{
                  <View style={styles.itemImages}>
                      <ScrollView
                        horizontal
-                       pagingEnabled
                        automaticallyAdjustContentInsets={false}
                        showsHorizontalScrollIndicator={false}>
                          <View style={styles.images}>

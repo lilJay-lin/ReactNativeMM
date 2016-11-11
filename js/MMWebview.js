@@ -21,13 +21,13 @@ export default class MMWebView extends Component{
   }
   render(){
     return (
-      <View>
+      <View style={{flex: 1}}>
         <WebView
           ref = {(webView) => this.webView = webView}
           style={{
             backgroundColor: '#fff',
           }}
-          source={{uri: 'https://www.baidu.com'}}
+          source={{uri: 'http://www.baidu.com'}}
           scalesPageToFit={true}
         />
       </View>
@@ -40,7 +40,6 @@ const DISABLED_WASH = 'rgba(255,255,255,0.25)'
 
 const TEXT_INPUT_REF = 'urlInput'
 const WEBVIEW_REF = 'webview'
-const DEFAULT_URL = 'https://m.facebook.com'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
