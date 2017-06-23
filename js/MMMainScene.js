@@ -18,7 +18,7 @@ import MMGame from './MMGame'
 import MMChoice from './MMChoice'
 import MMEnjoy from './MMEnjoy'
 import MMSoft from './MMSoft'
-import MMWebView from './MMWebView'
+import MMWebView from './MMWebview'
 import MMDetail from './MMDetail'
 import MMDetailList from './MMDetailList'
 export default class ReactNativeMM extends Component {
